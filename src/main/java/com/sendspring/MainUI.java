@@ -2,19 +2,23 @@ package com.sendspring;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import android.widget.Button;
 
 public class MainUI extends Activity {
-    public static ExecutorService executorService  = Executors.newCachedThreadPool();
+    final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+    private MySMSHelper myHelper;
+    private Button reply_button;
+    private Button word_button;
+    private Button sms_button;
+    private Button add_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +28,21 @@ public class MainUI extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        //注册短信监听
+        IntentFilter filter = new IntentFilter(SMS_RECEIVED);
+        BroadcastReceiver receiver = new SMSReceiver((SSApplication)getApplication());
+        registerReceiver(receiver, filter);
+
+        reply_button=(Button)this.findViewById(R.id.reply_button);
+        word_button=(Button)this.findViewById(R.id.word_button);
+        sms_button=(Button)this.findViewById(R.id.sms_button);
+        add_button=(Button)this.findViewById(R.id.add_new_button);
 
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_ui, menu);
         return true;

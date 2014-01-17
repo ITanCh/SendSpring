@@ -1,5 +1,7 @@
 package com.sendspring;
 
+import android.util.Log;
+
 /**
  * Created by TianChi on 14-1-16.
  *
@@ -18,15 +20,14 @@ public class SMSProcess  implements Runnable{
     @Override
     public void run() {
         if(handleSMS()){
+            Log.i("SMSProcess", "准备发送");
             new SMSSend().send(addr);
         }
     }
 
     //判断短信是否是祝福短信
    private boolean handleSMS(){
-        if(body.contains("春节"))
-            return true;
-        return false;
+        return body.contains("春节");
     }
 
 }

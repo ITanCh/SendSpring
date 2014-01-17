@@ -1,8 +1,5 @@
 package com.sendspring;
 
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.telephony.SmsManager;
 
 /**
