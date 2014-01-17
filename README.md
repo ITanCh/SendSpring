@@ -8,11 +8,11 @@ SendSpring
 
  * 监听的动态注册：在mainActivity的onCreate里注册
 
-```java
-final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
-IntentFilter filter = new IntentFilter(SMS_RECEIVED);
-BroadcastReceiver receiver = new MessageBroadcastReceiver();
-registerReceiver(receiver, filter);
+```
+    final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+    IntentFilter filter = new IntentFilter(SMS_RECEIVED);
+    BroadcastReceiver receiver = new MessageBroadcastReceiver();
+    registerReceiver(receiver, filter);
 ```
 
  * 监听的静态注册：在Manifest里
