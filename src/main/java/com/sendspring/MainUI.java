@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +15,7 @@ import android.widget.Button;
 
 public class MainUI extends Activity {
     final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
-    private MySMSHelper myHelper;
-    private Button reply_button;
-    private Button word_button;
-    private Button sms_button;
-    private Button add_button;
+    private BroadcastReceiver receiver ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +26,13 @@ public class MainUI extends Activity {
                     .commit();
         }
         //注册短信监听
+        Log.i("MAIN", "注册监听");
         IntentFilter filter = new IntentFilter(SMS_RECEIVED);
-        BroadcastReceiver receiver = new SMSReceiver((SSApplication)getApplication());
+        receiver = new SMSReceiver((SSApplication) getApplication());
         registerReceiver(receiver, filter);
 
-        reply_button=(Button)this.findViewById(R.id.reply_button);
-        word_button=(Button)this.findViewById(R.id.word_button);
-        sms_button=(Button)this.findViewById(R.id.sms_button);
-        add_button=(Button)this.findViewById(R.id.add_new_button);
-
+        Button wordsButton = (Button) this.findViewById(R.id.wordsButton);
+        Button smsButton = (Button) this.findViewById(R.id.smsButton);
     }
 
 
@@ -76,4 +71,11 @@ public class MainUI extends Activity {
         }
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        Log.i("MAIN","取消监听");
+        unregisterReceiver(receiver);
+    }
 }

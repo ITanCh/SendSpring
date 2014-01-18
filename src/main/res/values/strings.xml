@@ -5,8 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="warm_word">新祝福词</string>
-    <string name="reply_list">已回复</string>
-    <string name="add_new_word">祝福词</string>
-    <string name="add_new_sms">添加祝福短信</string><string name="add_new_text">添加</string>
+    <string name="add_new_word">添加祝福词</string>
+    <string name="add_new_sms">添加祝福短信</string><string name="warm_sms">新祝福短信</string>
 
 </resources>

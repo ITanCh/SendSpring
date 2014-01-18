@@ -30,10 +30,10 @@ public class SMSReceiver  extends BroadcastReceiver {
             if (intent.getAction().equals(SMS_RECEIVED_ACTION)) {
                 SmsMessage[] messages = getMessagesFromIntent(intent);
                 for (SmsMessage message : messages) {
-                    String body = new String(message.getDisplayMessageBody());
-                    String addr = new String(message.getDisplayOriginatingAddress());
+                    String body = message.getDisplayMessageBody();
+                    String addr = message.getDisplayOriginatingAddress();
                     Log.i(TAG, addr + "  :" + body);
-                    app.getExecutorService().execute(new SMSProcess(body, addr));
+                    app.getExecutorService().execute(new SMSProcess(body, addr,app));
                 }
             }
         }
