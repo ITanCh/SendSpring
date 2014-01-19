@@ -1,4 +1,4 @@
-SendSpring
+﻿SendSpring
 ==========
 by Tianchi
 ----------
@@ -38,3 +38,12 @@ by Tianchi
 才发现application这个好东西，真不知道以前写的那些代码叫什么玩意，参数传递的这么蛋疼，罪过罪过。
 
 具体参考：http://my.eoe.cn/cainiao1/archive/2355.html
+
+####layout的管理
+
+* ListView
+>SimpleCursorAdapter适用于数据库内容的陈列
+
+>adapter的样式：http://blog.csdn.net/ma12an/article/details/7762961
+
+>自动旋转屏幕比较坑爹，如果没有在横屏上布局的话，横屏后导致有些部件找不到，出现NullPointerException
