@@ -11,5 +11,6 @@
     <string name="wordsButton">词</string>
     <string name="replyButton">已回复</string>
     <string name="smsButton">短信</string>
+    <string name="add_title">添加头部</string>
 
 </resources>

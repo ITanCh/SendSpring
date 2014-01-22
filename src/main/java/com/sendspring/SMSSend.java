@@ -3,6 +3,8 @@ package com.sendspring;
 import android.telephony.SmsManager;
 import android.util.Log;
 
+import java.util.List;
+
 /**
  * Created by TianChi on 14-1-16.
  *
@@ -15,9 +17,12 @@ public class SMSSend{
         this.app=app;
     }
     public void send(String addr){
-        String msg="天驰祝你:  "+app.getAText();
+        String msg=app.getTitle()+app.getAText();
         Log.i("Send",msg);
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(addr, null, msg ,null, null);
+        List<String> divideContents = sms.divideMessage(msg);
+        for (String text : divideContents) {
+            sms.sendTextMessage(addr, null, text, null, null);
+        }
     }
 }

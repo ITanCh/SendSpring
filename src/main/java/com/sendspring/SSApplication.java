@@ -23,6 +23,7 @@ public class SSApplication extends Application {
     private String[] words;
     private String[] texts;
     private SQLiteDatabase db;
+    private String title;
 
     @Override
     public void onCreate() {
@@ -40,7 +41,7 @@ public class SSApplication extends Application {
             c = db.query(MySMSHelper.WORD_TABLE, new String[]{MySMSHelper.ID}, null, null, null, null, null);
             if (c.getCount() == 0) {
                 //初始化词
-                String[] words = {"春节", "阖家", "欢乐", "幸福", "快乐", "祝", "愉快", "节日", "和睦", "安康", "健康"};
+                String[] words = {"春节", "阖家", "欢乐", "幸福", "快乐", "祝", "愉快", "节日", "和睦", "安康", "健康","平安","吉祥","如意","新年","恭喜","有余","美满","希望"};
                 for (String word : words) {
                     ContentValues cv = new ContentValues();
                     cv.put(MySMSHelper.WORD, word);
@@ -61,7 +62,8 @@ public class SSApplication extends Application {
             updateWords();
             updateSMS();
         }
-
+        //初始化开头
+        title="";
     }
 
     public ExecutorService getExecutorService() {
@@ -113,5 +115,13 @@ public class SSApplication extends Application {
         int i=(int)(Math.random()*100)%texts.length;
         Log.i("APP",String.valueOf(i));
         return texts[i];
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String s){
+        title=s;
     }
 }

@@ -15,7 +15,7 @@ import org.apache.http.conn.routing.BasicRouteDirector;
  */
 
 public class SMSReceiver  extends BroadcastReceiver {
-    public static final String TAG = "SMSReceiver!!!!!!!";
+    public static final String TAG = "SMSReceiver";
     public static final String SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED";
     private SSApplication app;
 

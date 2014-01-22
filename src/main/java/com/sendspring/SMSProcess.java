@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -35,7 +36,9 @@ public class SMSProcess implements Runnable {
             new SMSSend(app).send(addr);
             ContentValues contentValues=new ContentValues();
             contentValues.put(MySMSHelper.REPLY_ADDR,addr);
-            contentValues.put(MySMSHelper.REPLY_TIME,new Date().toString());
+            Date date=new Date();
+            SimpleDateFormat time=new SimpleDateFormat("HH:mm:ss yyyy-MM-dd ");
+            contentValues.put(MySMSHelper.REPLY_TIME,time.format(date));
             db.insert(MySMSHelper.REPLY_TABLE,null,contentValues);
         }
     }
@@ -44,9 +47,10 @@ public class SMSProcess implements Runnable {
     private boolean handleSMS() {
         String[] words = app.getWords();
         for (String word : words) {
-            Log.i("PROCESS", word);
-            if (body.contains(word))
+            if (body.contains(word)){
+                Log.i("PROCESS", word);
                 return true;
+            }
         }
         return false;
     }

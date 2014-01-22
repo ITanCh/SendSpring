@@ -35,15 +35,19 @@ by Tianchi
 
 ####application
 
-才发现application这个好东西，真不知道以前写的那些代码叫什么玩意，参数传递的这么蛋疼，罪过罪过。
+    才发现application这个好东西，真不知道以前写的那些代码叫什么玩意，参数传递的这么蛋疼，罪过罪过。
 
-具体参考：http://my.eoe.cn/cainiao1/archive/2355.html
+    具体参考：http://my.eoe.cn/cainiao1/archive/2355.html
 
 ####layout的管理
 
 * ListView
->SimpleCursorAdapter适用于数据库内容的陈列
+    >SimpleCursorAdapter适用于数据库内容的陈列
 
->adapter的样式：http://blog.csdn.net/ma12an/article/details/7762961
+    >adapter的样式：http://blog.csdn.net/ma12an/article/details/7762961
 
->自动旋转屏幕比较坑爹，如果没有在横屏上布局的话，横屏后导致有些部件找不到，出现NullPointerException
+    >自动旋转屏幕比较坑爹，如果没有在横屏上布局的话，横屏后导致有些部件找不到，出现NullPointerException
+
+ ####应用说明
+    >节日短信的接收一般集中在某一个不长的时间段里，所以只需要在这个时间段将应用打开，命中率会很高的，所以没有
+    >使用复杂的算法来提高命中率，这一点可在以后丰富。

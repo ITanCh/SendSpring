@@ -13,14 +13,21 @@
         android:layout_gravity="center">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="300dp">
 
             <ListView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="270dp"
                 android:id="@+id/wordsList" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=""
+                android:id="@+id/titleText" />
 
         </LinearLayout>
 
@@ -56,16 +63,10 @@
             android:layout_gravity="center">
 
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:id="@+id/wordsText"
                 android:hint="@string/warm_word" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_new_word"
-                android:id="@+id/addWordsButton" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,17 +75,22 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center">
 
-            <EditText
-                android:layout_width="200dp"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/smsText"
-                android:hint="@string/warm_sms" />
+                android:text="@string/add_new_word"
+                android:id="@+id/addWordsButton" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_new_sms"
                 android:id="@+id/addSmsButton" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_title"
+                android:id="@+id/addTitleButton" />
         </LinearLayout>
     </LinearLayout>
 

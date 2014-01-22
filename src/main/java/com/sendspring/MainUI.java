@@ -20,6 +20,7 @@ import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -33,8 +34,9 @@ public class MainUI extends Activity implements View.OnClickListener {
     private Button smsButton;
     private Button addWordsButton;
     private Button addSmsButton;
-    private EditText wordText;
-    private EditText smsText;
+    private Button addTitleButton;
+    private EditText addText;
+    private TextView titleText;
     private Cursor wordc;
     private Cursor replyc;
     private Cursor smsc;
@@ -65,10 +67,10 @@ public class MainUI extends Activity implements View.OnClickListener {
         wordc = db.query(MySMSHelper.WORD_TABLE, null, null, null, null, null, null);
         Log.i("MAIN", "初始化List");
         wordsList = (ListView) this.findViewById(R.id.wordsList);
-//        wordsList.setAdapter(new SimpleCursorAdapter(this,
-//                android.R.layout.simple_list_item_1, wordc,
-//                new String[]{MySMSHelper.WORD},
-//                new int[]{android.R.id.text1}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER));
+        wordsList.setAdapter(new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_1, wordc,
+                new String[]{MySMSHelper.WORD},
+                new int[]{android.R.id.text1}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER));
         Log.i("MAIN", "结束初始化List");
         wordsButton = (Button) this.findViewById(R.id.wordsButton);
         wordsButton.setOnClickListener(this);
@@ -80,9 +82,10 @@ public class MainUI extends Activity implements View.OnClickListener {
         addWordsButton.setOnClickListener(this);
         addSmsButton = (Button) this.findViewById(R.id.addSmsButton);
         addSmsButton.setOnClickListener(this);
-
-        wordText = (EditText) this.findViewById(R.id.wordsText);
-        smsText = (EditText) this.findViewById(R.id.smsText);
+        addTitleButton=(Button)this.findViewById(R.id.addTitleButton);
+        addTitleButton.setOnClickListener(this);
+        titleText=(TextView)this.findViewById(R.id.titleText);
+        addText = (EditText) this.findViewById(R.id.wordsText);
     }
 
 
@@ -127,8 +130,8 @@ public class MainUI extends Activity implements View.OnClickListener {
                     new String[]{MySMSHelper.SMS_TEXT},
                     new int[]{android.R.id.text1}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER));
         } else if (view == addWordsButton) {
-            if (wordText != null) {
-                String word = wordText.getText().toString();
+            if (addText != null) {
+                String word = addText.getText().toString();
                 if (!word.equals("")) {
                     Cursor c = db.query(MySMSHelper.WORD_TABLE, null, MySMSHelper.WORD + "=?", new String[]{word}, null, null, null);
                     if (c.getCount() > 0) {
@@ -147,13 +150,22 @@ public class MainUI extends Activity implements View.OnClickListener {
                 }
             }
         } else if (view == addSmsButton) {
-            if (smsText != null) {
-                String sms = smsText.getText().toString();
+            if (addText != null) {
+                String sms = addText.getText().toString();
                 if (!sms.equals("")) {
                     ContentValues cv = new ContentValues();
                     cv.put(MySMSHelper.SMS_TEXT, sms);
                     db.insert(MySMSHelper.SMS_TABLE, null, cv);
                     app.updateSMS();
+                    Toast.makeText(this, "添加成功！", Toast.LENGTH_LONG).show();
+                }
+            }
+        }else if(view==addTitleButton){
+            if (addText != null) {
+                String title = addText.getText().toString();
+                if (!title.equals("")) {
+                    titleText.setText(title);
+                    app.setTitle(title);
                     Toast.makeText(this, "添加成功！", Toast.LENGTH_LONG).show();
                 }
             }
@@ -181,7 +193,6 @@ public class MainUI extends Activity implements View.OnClickListener {
         if (wordc != null) wordc.close();
         if (replyc != null) replyc.close();
         if (smsc != null) smsc.close();
-        if (db != null) db.close();
         Log.i("MAIN", "取消监听");
         try {
             unregisterReceiver(receiver);
